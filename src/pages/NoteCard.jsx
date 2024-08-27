@@ -5,6 +5,8 @@ import { db } from "../appWrite/databses";
 import { setNewOffSet, setZIndex, bodyParser } from "../utils";
 import Spinner from "./Spinner";
 import DeleteButton from "./DeleteButton";
+import { useContext } from "react";
+import { NoteContext } from "../Context/NoteContext";
 const NoteCard = ({ note ,setNotes}) => {
   const [saving, setSaving] = useState(false);
   const KeyUpTimer = useRef();
@@ -18,9 +20,11 @@ const NoteCard = ({ note ,setNotes}) => {
   let mouseStartPos = { x: 0, y: 0 };
 
   const cardRef = useRef(null);
+  const { setSelectedNote } = useContext(NoteContext);
 
   useEffect(() => {
     autoGrow(textAreaRef);
+    setZIndex(cardRef.current);
   }, []);
   const autoGrow = (textAreaRef) => {
     const { current } = textAreaRef;
@@ -36,6 +40,7 @@ const NoteCard = ({ note ,setNotes}) => {
     document.addEventListener("mousemove", mouseMove);
     document.addEventListener("mouseup", mouseUp);
     setZIndex(cardRef.current);
+    setSelectedNote(note);
 
   };
 
@@ -100,9 +105,16 @@ const NoteCard = ({ note ,setNotes}) => {
       </div>
       <div className="card-body">
         <textarea
+                        
+
           onKeyUp={handleKeyUp}
           ref={textAreaRef}
-          onFocus={() => setZIndex(cardRef.current)}
+          onFocus={() => {setZIndex(cardRef.current)
+            setSelectedNote(note);
+
+          }
+
+          }
           onInput={() => {
             autoGrow(textAreaRef);
           }}

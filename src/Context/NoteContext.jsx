@@ -6,6 +6,7 @@ import { db } from "../appWrite/databses";
 export const NoteContext=createContext();
 
 const NotesProvider=({children})=>{
+    const [selectedNote, setSelectedNote] = useState(null);
 const [loading,setLoading]=useState(true);
 const [notes,setNotes]=useState();
 useEffect(() => {
@@ -16,7 +17,10 @@ const init = async () => {
     setNotes(response.documents);
     setLoading(false);
 };
-const contextData={notes,setNotes};
+const contextData={notes,setNotes,
+    selectedNote, 
+    setSelectedNote
+};
 return(
 
    < NoteContext.Provider value={contextData}>
