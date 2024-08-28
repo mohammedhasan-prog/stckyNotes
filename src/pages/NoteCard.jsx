@@ -110,7 +110,7 @@ const NoteCard = ({ note ,setNotes}) => {
           onKeyUp={handleKeyUp}
           ref={textAreaRef}
           onFocus={() => {setZIndex(cardRef.current)
-            setSelectedNote(note);
+            setSelectedNote(note)
 
           }
 

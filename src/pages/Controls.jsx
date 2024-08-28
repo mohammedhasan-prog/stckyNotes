@@ -5,6 +5,7 @@ import Color from "./Color";
 
  
 const Controls = () => {
+    
     return (
         <div id="controls">
             <AddButton />

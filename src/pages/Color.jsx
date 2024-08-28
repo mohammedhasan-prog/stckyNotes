@@ -1,14 +1,17 @@
 import { useContext } from "react";
 import { NoteContext } from "../Context/NoteContext";
+import { db } from "../appWrite/databses";
 
 const Color = ({ color }) => {
-    const {selectedNote}=useContext(NoteContext);
+  
+    const {selectedNote,notes,setNotes}=useContext(NoteContext);
     const changeColor = () => {
         console.log("selected Color:", selectedNote);
         try {
             const currentNoteIndex = notes.findIndex(
                 (note) => note.$id === selectedNote.$id
             );
+           
      
             const updatedNote = {
                 ...notes[currentNoteIndex],
